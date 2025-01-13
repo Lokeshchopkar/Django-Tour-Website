@@ -1,0 +1,55 @@
+{% extends 'blog/basic.html' %}
+{% block title %} Blog HomePage {% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="row mt-4">
+    <div class="col-md-8">
+      <h3 class="fst-italic">
+        {{post.title}}
+      </h3>
+
+      <article class="blog-post">
+        <h2 class="display-5 link-body-emphasis mb-1">{{post.heading}}</h2>
+        <p class="blog-post-meta">{{post.pub_date}}</p>
+        <p>{{post.conheading}}</p>
+        
+
+        <h2>{{post.subheading1}}</h2>
+        <p>{{post.consubheading1}}</p>
+
+
+        <h3>{{post.subheading2}}</h3>
+        <p>{{post.consubheading2}}</p>
+      </article>
+
+      <div class="fb-comments my-3" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-numposts="5"></div>
+      <div class="fb-like my-3" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-width="" data-layout="" data-action="" 
+      data-size="" data-share="true"></div>
+
+    </div>
+
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        <div class="p-4 mb-3 bg-body-tertiary rounded">
+          <h4 class="fst-italic">About</h4>
+          <p class="mb-0">Nurtured from the seed of a single idea ‘to empower the traveller with easy & instant travel bookings providing comprehensive choices’, 
+            Tripedy is a pioneer in India’s online travel space.</p>
+            <div class="fb-share-button my-3" data-href="http://127.0.0.1:8000/blog/blogpost/{{post.post_id}}" data-layout="" data-size=""><a target="_blank" 
+              href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fblog%2Fblogpost%2F3&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+        </div>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Contact Us On</h4>
+          <ol class="list-unstyled">
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

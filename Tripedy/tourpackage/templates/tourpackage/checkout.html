@@ -1,0 +1,111 @@
+{% extends 'tourpackage/basic.html' %}
+
+{% block title %} Checkout - {{package.package_name}} {% endblock %}
+
+{% block body %} 
+<div class="container my-4">
+
+   <div class="container my-4">
+        <div class="row">
+            <div class="col-md-4">
+            <div class="row">
+                <img src="/media/{{package.image}}" width="150px" height="270px">
+            </div>           
+            </div>
+            <div class="col-md-8">
+                <h1>{{package.package_name}}</h1>
+                <p id="totalprice" name="totalprice"><h3><b>₹{{package.price}} </b></h3><h5>per person</h5></p>
+                <p><h5><br>{{package.desc}}</h5></p>
+            </div>
+        </div>
+    </div> 
+
+{% comment %} Main form yah se chal raha hai {% endcomment %}
+    <form method="POST" action="{% url 'checkout' myid=myid %}"> {% csrf_token %}
+        <input type="hidden" name="amount" id="amount" required>
+        <div class="col my-4">
+            <h3>Step 1 - Enter Traveller Details</h3>
+            <div class="col-md-5">
+                <label for="inputTraveller" class="form-label"><b>Number Of Travellers</b></label>
+                <select class="form-select" name="inputTraveller" id="inputTraveller">
+                    <option selected>Select Number Of Travellers</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                    <option value="5">Five</option>
+                </select>
+            </div>
+        </div>
+        <div class="col my-4">
+            <h3>Step 2 - Please Enter Contact Details</h3>
+            <div class="col-md-5">
+                <label for="inputName" class="form-label"><b>Name</b></label>
+                <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter Full Name">
+              </div>
+                <div class="col-md-5">
+                  <label for="inputEmail4" class="form-label mt-2"><b>Email</b></label>
+                  <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Eg.abc@gmail.com">
+                </div>
+                <div class="col-md-5">
+                  <label for="inputMobile" class="form-label mt-2"><b>Mobile</b></label>
+                  <input type="tel" class="form-control" id="inputMobile" name="phone" placeholder="Eg.1234567891">
+                </div>
+        </div>
+        <div class="col my-4">
+            <h3>Step 3 - Please Enter GST Details</h3>
+                <div class="col-md-4">
+                    <label for="inputCity" class="form-label"><b>City</b></label>
+                    <input type="text" class="form-control" id="inputCity" name="city" placeholder="Eg.Bangalore">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label mt-2"><b>GST State</b></label>
+                    <select id="inputState" class="form-select" name="state">
+                    <option selected>Choose State</option>
+                    <option>Maharashtra</option>
+                    <option>Madhya Pradesh</option>
+                    <option>Chattisghar</option>
+                    <option>Goa</option>
+                    <option>Gujarat</option>
+                    <option>Rajasthan</option>
+                    <option>Uttar Pradesh</option>
+                    <option>Telangana</option>
+                    <option>Kernataka</option>
+                    <option>Kerala</option>
+                    <option>Tamil Nadu</option>
+                    <option>Bihar</option>
+                    <option>Punjab</option>
+                    <option>Delhi</option>
+                    <option>Odisha</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                <label for="inputAddress" class="form-label mt-2"><b>Address</b></label>
+                <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St">
+                </div>
+        </div>
+        <div class="col">
+            <h3>Special Requests</h3>
+            <div class="form-floating">
+                <textarea class="form-control" name="textarea" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">Enter Special Requests</label>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary my-4">Book Package</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+
+{% block js %} 
+<script>
+    {% if thank %}
+    alert('Booking Successfull !! Your booking ID is {{id}}. Use this ID for more details about your tour.')
+    document.location = '/tourpackage';
+    {% endif %}
+    $('#amount').val($('#totalprice').html())
+</script>
+{% endblock %}
